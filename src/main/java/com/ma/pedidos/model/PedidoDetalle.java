@@ -4,13 +4,19 @@
 package com.ma.pedidos.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author jonatan.moreira
@@ -21,10 +27,12 @@ import javax.persistence.Table;
 public class PedidoDetalle {
 	
 	@Id
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
 
-	@ManyToOne    
-	@JoinColumn(name = "pedido_cabecera_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pedido_cabecera_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private PedidoCabecera pedidoCabecera;
 
 	@ManyToOne
@@ -66,7 +74,7 @@ public class PedidoDetalle {
 	}
 
 	/**
-	 * @return the producto
+	 * @return the productos
 	 */
 	public Producto getProducto() {
 		return producto;

@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * @author jonatan.moreira
  *
@@ -22,7 +24,9 @@ import javax.persistence.Table;
 public class PedidoCabecera {
 		
 	@Id	
-	private int id;
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	private String id;
 	
 	@Column(name="direccion", nullable=true, length=50)
 	private String direccion;
@@ -51,14 +55,14 @@ public class PedidoCabecera {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

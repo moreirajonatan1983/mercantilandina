@@ -19,8 +19,6 @@ import javax.persistence.Table;
 public class Producto {
 
 	@Id
-//	@GeneratedValue(generator="system-uuid")
-//	@GenericGenerator(name="system-uuid", strategy = "uuid")	
 	private String id;
 	
 	@Column(name="nombre", nullable=false, length=50)
