@@ -23,6 +23,9 @@ public class PedidosController {
 	@RequestMapping("/hello")
 	@ResponseBody
 	String home() {
+		
+		log.info("Hola Pedidos!!");
+		
 		return "Hola Pedidos!!";
 	}	
 	

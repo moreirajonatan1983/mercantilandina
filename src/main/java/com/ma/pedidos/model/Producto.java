@@ -1,40 +1,51 @@
 /**
  * 
  */
-package com.ma.perdidos.model;
+package com.ma.pedidos.model;
 
 import java.math.BigDecimal;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author jonatan.moreira
  *
  */
-@Component
+@Entity
+@Table(name= "producto")
 public class Producto {
 
-	private Integer id;
+	@Id
+//	@GeneratedValue(generator="system-uuid")
+//	@GenericGenerator(name="system-uuid", strategy = "uuid")	
+	private String id;
 	
+	@Column(name="nombre", nullable=false, length=50)
 	private String nombre;
 	
+	@Column(name="description_corta", nullable=false, length=50)
 	private String descripcionCorta;
 	
+	@Column(name="description_larga", nullable=false, length=150)
 	private String descripcionLarga;
 	
+	@Column(name="precio_unitario")
 	private BigDecimal precioUnitario;
 
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -93,5 +104,11 @@ public class Producto {
 	public void setPrecioUnitario(BigDecimal precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcionCorta=" + descripcionCorta
+				+ ", descripcionLarga=" + descripcionLarga + ", precioUnitario=" + precioUnitario + "]";
+	}
+
 }

@@ -1,35 +1,51 @@
 /**
  * 
  */
-package com.ma.perdidos.model;
+package com.ma.pedidos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author jonatan.moreira
  *
  */
+@Entity
+@Table(name="pedidos_cabecera")
 public class PedidoCabecera {
-
-	
+		
+	@Id	
 	private int id;
 	
+	@Column(name="direccion", nullable=true, length=50)
 	private String direccion;
 	
+	@Column(name="email", nullable=true, length=50)
 	private String email;
 	
+	@Column(name="telefono", nullable=true, length=50)
 	private String telefono;
 	
+	@Column(name="horario")
 	private LocalTime horario;
 	
+	@Column(name="fecha_alta")
 	private LocalDate fechaAlta;
 	
+	@Column(name="monto_total")
 	private BigDecimal montoTotal;
 	
+	@Column(name="aplico_descuento")
 	private boolean aplicoDescuento;
 	
+	@Column(name="estado")
 	private String estado;
 
 	/**

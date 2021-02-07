@@ -1,37 +1,53 @@
 /**
  * 
  */
-package com.ma.perdidos.model;
+package com.ma.pedidos.model;
 
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author jonatan.moreira
  *
  */
+@Entity
+@Table(name="pedidos_detalle")
 public class PedidoDetalle {
+	
+	@Id
+	private String id;
 
-	private Integer id;
-	
+	@ManyToOne    
+	@JoinColumn(name = "pedido_cabecera_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private PedidoCabecera pedidoCabecera;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Producto producto;
 	
+	@Column(name="cantidad")
 	private int cantidad;
 	
+	@Column(name="precioUnitario")
 	private BigDecimal precioUnitario;
 
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
