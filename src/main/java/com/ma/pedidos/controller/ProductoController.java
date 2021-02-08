@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ma.pedidos.model.Producto;
+import com.ma.pedidos.entity.Producto;
 import com.ma.pedidos.service.ProductoService;
 
 /**

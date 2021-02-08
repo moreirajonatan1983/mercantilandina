@@ -6,7 +6,6 @@ package com.ma.pedidos.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +14,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ma.pedidos.model.Pedido;
-import com.ma.pedidos.model.PedidoCabecera;
-import com.ma.pedidos.model.PedidoDetalle;
-import com.ma.pedidos.model.Producto;
-import com.ma.pedidos.model.RespuestaPedido;
-import com.ma.pedidos.model.RespuestaProducto;
-import com.ma.pedidos.model.SolicitudProducto;
+import com.ma.pedidos.dto.PedidoDTO;
+import com.ma.pedidos.dto.RespuestaPedidoDTO;
+import com.ma.pedidos.dto.RespuestaProductoDTO;
+import com.ma.pedidos.dto.SolicitudProductoDTO;
+import com.ma.pedidos.entity.PedidoCabecera;
+import com.ma.pedidos.entity.PedidoDetalle;
+import com.ma.pedidos.entity.Producto;
 import com.ma.pedidos.repository.PedidoCabeceraRepository;
 import com.ma.pedidos.repository.PedidoDetalleRepository;
 import com.ma.pedidos.repository.ProductoRepository;
@@ -62,7 +61,7 @@ public class PedidoService {
     		return null;
     }
 
-    public RespuestaPedido saveOrUpdate(Pedido pedido) {
+    public RespuestaPedidoDTO saveOrUpdate(PedidoDTO pedido) {
     	
     	log.info("Crea el pedido: " + pedido.toString());
     	    	
@@ -81,7 +80,7 @@ public class PedidoService {
     	
 		int countProductos = 0;
 		
-    	for(SolicitudProducto p: pedido.getDetalle() ) {    	
+    	for(SolicitudProductoDTO p: pedido.getDetalle() ) {    	
     		
     		Optional<Producto> p1 = productoRepository.findById(p.getProducto());
     		if(p1 != null) {
@@ -109,11 +108,11 @@ public class PedidoService {
     	
     	pedidoCabeceraRepository.save(pedidoCabecera);
   	    	    	    	
-    	List<RespuestaProducto> listProductos = new ArrayList<RespuestaProducto>();
+    	List<RespuestaProductoDTO> listProductos = new ArrayList<RespuestaProductoDTO>();
     	
     	for(PedidoDetalle pd :pedidoDetalleRepository.findAll()) {
 
-    		RespuestaProducto respuestaProducto = new RespuestaProducto();
+    		RespuestaProductoDTO respuestaProducto = new RespuestaProductoDTO();
     		
     		if(pedidoCabecera.equals(pd.getPedidoCabecera())) {
     			

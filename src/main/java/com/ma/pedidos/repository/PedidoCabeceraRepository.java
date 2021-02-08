@@ -5,7 +5,8 @@ package com.ma.pedidos.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.ma.pedidos.model.PedidoCabecera;
+import com.ma.pedidos.entity.PedidoCabecera;
+
 
 /**
  * @author jonatan.moreira

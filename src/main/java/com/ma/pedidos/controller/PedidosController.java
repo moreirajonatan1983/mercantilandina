@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ma.pedidos.model.Pedido;
-import com.ma.pedidos.model.PedidoDetalle;
-import com.ma.pedidos.model.RespuestaPedido;
+import com.ma.pedidos.dto.PedidoDTO;
+import com.ma.pedidos.dto.RespuestaPedidoDTO;
+import com.ma.pedidos.entity.PedidoDetalle;
 import com.ma.pedidos.service.PedidoService;
 
 
@@ -97,14 +97,14 @@ public class PedidosController {
 
     @PostMapping("/pedidos")
     @ResponseStatus(code = HttpStatus.CREATED)
-    private ResponseEntity<Object>  savePedido(@RequestBody Pedido pedido) {
+    private ResponseEntity<Object>  savePedido(@RequestBody PedidoDTO pedido) {
     	
     	log.info("Creando un Pedido: " + pedido.toString());
     	
     	Map<String, String> errors = new HashMap<String, String>();
     	errors.put("error", "Error al crear un Pedido");    	
     	
-    	RespuestaPedido respuestaPedido = null;                
+    	RespuestaPedidoDTO respuestaPedido = null;                
         
         try {
         	
@@ -124,7 +124,7 @@ public class PedidosController {
 	
     @PutMapping("/pedidos/{id}")    
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    private void putPedido(@PathVariable("id") String id, @RequestBody Pedido pedido) {
+    private void putPedido(@PathVariable("id") String id, @RequestBody PedidoDTO pedido) {
     	
     	log.info("Modificando el pedido: " + pedido.toString());
     	

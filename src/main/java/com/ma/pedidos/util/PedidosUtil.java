@@ -3,17 +3,18 @@ package com.ma.pedidos.util;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.ma.pedidos.model.PedidoCabecera;
-import com.ma.pedidos.model.RespuestaPedido;
-import com.ma.pedidos.model.RespuestaProducto;
+import com.ma.pedidos.dto.RespuestaPedidoDTO;
+import com.ma.pedidos.dto.RespuestaProductoDTO;
+import com.ma.pedidos.entity.PedidoCabecera;
+
 
 public class PedidosUtil {
 
 	private static double DESCUENTO = 0.7;
 	
-	public static RespuestaPedido getRespuestaPedido(PedidoCabecera pedidoCabecera, List<RespuestaProducto> listRespuestaProducto, boolean descuento) {
+	public static RespuestaPedidoDTO getRespuestaPedido(PedidoCabecera pedidoCabecera, List<RespuestaProductoDTO> listRespuestaProducto, boolean descuento) {
 		
-		RespuestaPedido respuestaPedido = new RespuestaPedido();
+		RespuestaPedidoDTO respuestaPedido = new RespuestaPedidoDTO();
 		
 		respuestaPedido.setFecha(pedidoCabecera.getFechaAlta());
 		respuestaPedido.setDireccion(pedidoCabecera.getDireccion());

@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ma.pedidos.model.Producto;
+import com.ma.pedidos.entity.Producto;
 import com.ma.pedidos.repository.ProductoRepository;
 
 /**
