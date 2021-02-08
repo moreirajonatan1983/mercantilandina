@@ -3,6 +3,8 @@
  */
 package com.ma.pedidos.dto;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author jonatan.moreira
  *
@@ -11,6 +13,7 @@ public class SolicitudProductoDTO {
 
 	private String producto;
 	
+	@NotBlank(message = "Falta ingresar la cantidad.")
 	private Integer cantidad;
 
 	/**

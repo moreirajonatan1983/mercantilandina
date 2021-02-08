@@ -6,12 +6,15 @@ package com.ma.pedidos.dto;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author jonatan.moreira
  *
  */
 public class PedidoDTO {
 
+	@NotBlank(message = "La direccion no puede estar nula.")
 	private String direccion;
 	
 	private String email;
