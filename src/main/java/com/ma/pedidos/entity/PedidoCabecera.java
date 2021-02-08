@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,7 +28,7 @@ public class PedidoCabecera {
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
-	
+		
 	@Column(name="direccion", nullable=true, length=50)
 	private String direccion;
 	

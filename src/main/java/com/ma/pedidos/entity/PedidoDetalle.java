@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -38,6 +39,7 @@ public class PedidoDetalle {
 	@JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Producto producto;
 	
+	@NotBlank(message = "falta ingresar la cantidad")
 	@Column(name="cantidad")
 	private int cantidad;
 	

@@ -89,7 +89,7 @@ public class PedidoService {
     			
     			pedidoDetalle.setProducto(p1.get());
     			
-    			pedidoDetalle.setCantidad(p.getCantidad());    			
+    			pedidoDetalle.setCantidad(p.getCantidad());
     			pedidoDetalle.setPrecioUnitario(p1.get().getPrecioUnitario());    			
     			pedidoDetalle.setPedidoCabecera(pedidoCabecera);
     			

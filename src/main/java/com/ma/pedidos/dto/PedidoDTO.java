@@ -6,23 +6,28 @@ package com.ma.pedidos.dto;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.validation.annotation.Validated;
 
 /**
  * @author jonatan.moreira
  *
  */
 public class PedidoDTO {
-
+	
 	@NotBlank(message = "La direccion no puede estar nula.")
 	private String direccion;
 	
+	@NotBlank(message = "El email es obligatorio.")
 	private String email;
 	
 	private String telefono;
 	
 	private LocalTime horario;
 	
+	@Valid
 	private List<SolicitudProductoDTO> detalle;
 	
 	/**

@@ -4,16 +4,21 @@
 package com.ma.pedidos.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
+
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.NonNull;
 
 /**
  * @author jonatan.moreira
  *
  */
 public class SolicitudProductoDTO {
-
-	private String producto;
 	
-	@NotBlank(message = "Falta ingresar la cantidad.")
+	private String producto;
+		
+	@NotNull(message = "Falta ingresar la cantidad.")
 	private Integer cantidad;
 
 	/**

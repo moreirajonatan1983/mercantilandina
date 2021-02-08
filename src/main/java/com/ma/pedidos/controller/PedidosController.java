@@ -3,15 +3,24 @@
  */
 package com.ma.pedidos.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,7 +106,30 @@ public class PedidosController {
 
     @PostMapping("/pedidos")
     @ResponseStatus(code = HttpStatus.CREATED)
-    private ResponseEntity<Object>  savePedido(@RequestBody PedidoDTO pedido) {
+    private ResponseEntity<Object>  savePedido(@Valid @RequestBody PedidoDTO pedido, BindingResult bindingResult) {
+    	
+		if(bindingResult.hasErrors()){
+			//handle errors and return
+	    	
+	    	Map<String, List<Map>> errors = new HashMap<>();
+	    	List<Map> list = new ArrayList<>();
+	    	errors.put("errores", list);
+	    	
+			for (Object object : bindingResult.getAllErrors()) {
+			    
+				if(object instanceof FieldError) {
+			        FieldError fieldError = (FieldError) object;
+			        
+			        Map<String, String> error = new HashMap<>();
+			        error.put("error", fieldError.getDefaultMessage());
+			        
+			        errors.get("errores").add(error);
+			    }
+
+			}			
+									
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+		}
     	
     	log.info("Creando un Pedido: " + pedido.toString());
     	
@@ -116,6 +148,8 @@ public class PedidosController {
         } catch(Exception e) {
         	
         	log.error("Error al crear el pedido: " + pedido, e);
+        	
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(respuestaPedido);        
@@ -131,5 +165,5 @@ public class PedidosController {
     	//pedido.setId(id);
         //pedidoService.saveOrUpdate(pedido);
     }
-		
+    
 }
