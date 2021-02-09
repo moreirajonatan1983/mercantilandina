@@ -34,11 +34,11 @@ public class ProductoController {
 	private static final Log log = LogFactory.getLog(ProductoController.class);
 	
     @Autowired
-    ProductoService personService;
+    ProductoService productoService;
 
     @GetMapping("/productos")
     private List<Producto> getAllProductos() {
-        return personService.getAllProductos();
+        return productoService.getAllProductos();
     }
 
     @GetMapping("/productos/{id}")    
@@ -52,7 +52,7 @@ public class ProductoController {
     	Producto producto = null;
     	
     	try {
-    		producto = personService.getProductoById(id);
+    		producto = productoService.getProductoById(id);
     		
     		if(producto != null)
     			return ResponseEntity.status(HttpStatus.OK).body(producto);
@@ -75,7 +75,7 @@ public class ProductoController {
     	errors.put("error", "Producto no encontrado");
     	
     	try {    		
-    		personService.delete(id);
+    		productoService.delete(id);
     	} catch (Exception e) {
     		
     		log.error("Error al intentar eliminar un producto. id: " + id , e);
@@ -92,7 +92,7 @@ public class ProductoController {
     	
     	log.info("Guardando un Producto: " + producto.toString());
     	
-        personService.saveOrUpdate(producto);
+        productoService.saveOrUpdate(producto);
     }	
 	
     @PutMapping("/productos/{id}")    
@@ -102,7 +102,7 @@ public class ProductoController {
     	log.info("Modificando el producto: " + producto.toString());
     	
     	producto.setId(id);
-        personService.saveOrUpdate(producto);
+        productoService.saveOrUpdate(producto);
     }
     
 }
