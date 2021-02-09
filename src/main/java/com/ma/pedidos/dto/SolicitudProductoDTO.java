@@ -48,5 +48,13 @@ public class SolicitudProductoDTO {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	@Override
+	public String toString() {
+		return "SolicitudProductoDTO [producto=" + producto + ", cantidad=" + cantidad + "]";
+	}	
+
+	
+	
 	
 }

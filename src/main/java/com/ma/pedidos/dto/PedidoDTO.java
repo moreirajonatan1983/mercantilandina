@@ -99,5 +99,13 @@ public class PedidoDTO {
 	public void setDetalle(List<SolicitudProductoDTO> detalle) {
 		this.detalle = detalle;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "PedidoDTO [direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", horario="
+				+ horario + ", detalle=" + detalle + "]";
+	}
+
+	
+	
 }
