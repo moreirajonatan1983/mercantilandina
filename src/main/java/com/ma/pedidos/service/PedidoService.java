@@ -67,12 +67,12 @@ public class PedidoService {
      * @param fecha
      * @return
      */
-    public List<RespuestaPedidoDTO> getPedidosByFecha(LocalDate fecha) {
+    @SuppressWarnings("unchecked")
+	public List<RespuestaPedidoDTO> getPedidosByFecha(LocalDate fecha) {
         
-    	// TODO: falta filtrar por fecha
-    	List<PedidoDetalle> pedidos = new ArrayList<PedidoDetalle>();    	
-        pedidoDetalleRepository.findAll().forEach(pedido -> pedidos.add(pedido));
-                		
+    	List<PedidoDetalle> pedidos = new ArrayList<PedidoDetalle>();
+    	pedidoDetalleRepository.findPorFecha(fecha).forEach(pedido -> pedidos.add((PedidoDetalle) pedido));
+    	
         return PedidosUtil.getRespuestaPedidoDTO(pedidos);
         
     }    
