@@ -61,6 +61,22 @@ public class PedidoService {
     		return null;
     }
 
+    /**
+     * Busca los pedidos por fecha, los retorna como una lista de RespuestaPedidoDTO.
+     * 
+     * @param fecha
+     * @return
+     */
+    public List<RespuestaPedidoDTO> getPedidosByFecha(LocalDate fecha) {
+        
+    	// TODO: falta filtrar por fecha
+    	List<PedidoDetalle> pedidos = new ArrayList<PedidoDetalle>();    	
+        pedidoDetalleRepository.findAll().forEach(pedido -> pedidos.add(pedido));
+                		
+        return PedidosUtil.getRespuestaPedidoDTO(pedidos);
+        
+    }    
+    
     public RespuestaPedidoDTO saveOrUpdate(PedidoDTO pedido) {
     	
     	log.info("Crea el pedido: " + pedido.toString());
@@ -74,8 +90,7 @@ public class PedidoService {
     	pedidoCabecera.setFechaAlta(LocalDate.now());
     	
     	pedidoCabeceraRepository.save(pedidoCabecera);
-    	    	
-
+    	
 		Double montoTotal = new Double(0);		
     	
 		int countProductos = 0;

@@ -3,6 +3,8 @@
  */
 package com.ma.pedidos.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,18 +17,15 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -104,6 +103,12 @@ public class PedidosController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
+    /**
+     * 
+     * @param pedido
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/pedidos")
     @ResponseStatus(code = HttpStatus.CREATED)
     private ResponseEntity<Object>  savePedido(@Valid @RequestBody PedidoDTO pedido, BindingResult bindingResult) {
@@ -155,15 +160,27 @@ public class PedidosController {
         return ResponseEntity.status(HttpStatus.OK).body(respuestaPedido);        
         
     }	
-	
-    @PutMapping("/pedidos/{id}")    
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    private void putPedido(@PathVariable("id") String id, @RequestBody PedidoDTO pedido) {
+	   
+    /**
+     * Listar pedidos por fecha
+	 * 	Method: GET
+	 * Path: /pedidos?fecha=2020-05-26
+	 * Response 200
+     * 
+     * @param fecha
+     * @return listado de pedidos. Array Json 
+     */
+    @GetMapping("/pedidos")
+    private ResponseEntity<Object> getPedidosByFecha( @RequestParam("fecha") String fecha) {
     	
-    	log.info("Modificando el pedido: " + pedido.toString());
+    	log.info("Buscando pedido por fecha = " + fecha);
     	
-    	//pedido.setId(id);
-        //pedidoService.saveOrUpdate(pedido);
+    	LocalDate localDate = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yy-MM-dd"));
+    	
+    	List<RespuestaPedidoDTO> listaRespuestaPedidoDTO = pedidoService.getPedidosByFecha(localDate);
+    	    	
+    	return ResponseEntity.status(HttpStatus.OK).body(listaRespuestaPedidoDTO);
+    	
     }
     
 }

@@ -35,11 +35,10 @@ public class PedidoDetalle {
 	@JoinColumn(name = "pedido_cabecera_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private PedidoCabecera pedidoCabecera;
 
-	@ManyToOne
-	@JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@OneToOne(cascade = CascadeType.ALL)	
+	@JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Producto producto;
-	
-	@NotBlank(message = "falta ingresar la cantidad")
+		
 	@Column(name="cantidad")
 	private int cantidad;
 	
